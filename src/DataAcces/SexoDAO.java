@@ -71,7 +71,4 @@ public class SexoDAO extends SQLiteDataHelper implements IDAO<SexoDTO> {
     public boolean update(SexoDTO entity) throws Exception {
         return false;
     }
-
-
-
 }
