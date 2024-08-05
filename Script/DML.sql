@@ -59,30 +59,17 @@ INSERT INTO Persona
 ,(4                      ,      6        ,         12            , "1753193821" ,"Xenovia"    ,"Quarta");
 
 
--- INSERT INTO PersonaTipo
--- (Nombre) VALUES
--- ('Soldado')
--- ,('Mecanico')
--- ,('Experto Ingles')
--- ,('Expero Espanol');
+SELECT IdCatalogo
+    ,IdCatalogoTipo 
+    ,Nombre         
+    ,Descripcion    
+    ,Estado         
+    ,FechaCrea      
+    ,FechaModifica  
+    From Catalogo   
+    WHERE Estado='A'
+    AND   IdCatalogoTipo=2;
 
--- INSERT INTO Persona (IdPersonaTipo, Cedula, Nombre) VALUES
--- (4,'1753193817', 'Drax Ackerman')
--- ; 
-
--- UPDATE  Persona
--- SET     Nombre      = 'Luny Tunes'
--- WHERE   IdPersona   = '4';
-
--- SELECT tp.Nombre 'Cargo' , p.Nombre 'Nombres'
--- FROM PersonaTipo tp
--- JOIN Persona p ON tp.IdPersonaTipo = p.IdPersonaTipo;
-
--- SELECT * FROM Persona;
--- SELECT count(*) 'Nro Tipo Persona' FROM PersonaTipo;
--- SELECT * FROM PersonaTipo WHERE IdPersonaTipo = 2;
--- SELECT * FROM PersonaTipo WHERE IdPersonaTipo < 4;
--- SELECT Nombre FROM PersonaTipo WHERE IdPersonaTipo < 4;
--- SELECT Nombre FROM PersonaTipo WHERE Nombre like "e%";
--- SELECT Nombre FROM PersonaTipo WHERE Nombre like "%o";
--- SELECT Nombre FROM PersonaTipo WHERE Nombre like "%o%";
+    SELECT COUNT(*) TotalReg
+    FROM Catalogo
+    WHERE Estado='A' AND IdCatalogoTipo=2;

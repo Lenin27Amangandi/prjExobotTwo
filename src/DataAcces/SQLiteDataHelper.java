@@ -4,9 +4,13 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+// import java.sql.Connection;
+// import java.sql.DriverManager;
+// import java.sql.SQLException;
+
 public abstract class SQLiteDataHelper {
 
-    private static String DBPathConnection = "jbdc:sqlite:DataBase//ExaBot2k24.sqlite";
+    private static String DBPathConnection = "jdbc:sqlite:DataBase//ExaBot2k24.sqlite";
     private static Connection conn = null;
     //protected SQLiteDataHelper() {}
 
