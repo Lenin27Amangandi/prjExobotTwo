@@ -58,23 +58,33 @@ INSERT INTO Persona
 ,(3                      ,      6        ,         11            , "1753193822" ,"Touka"      ,"Kirishima")
 ,(4                      ,      6        ,         12            , "1753193821" ,"Xenovia"    ,"Quarta");
 
+SELECT IdCatalogo 
+                ,IdCatalogoTipo  
+                ,Nombre          
+                ,Descripcion     
+                ,Estado          
+                ,FechaCrea       
+                ,FechaModifica   
+                From Catalogo    
+                WHERE Estado='A' 
+                AND   IdCatalogoTipo = 1;
 
 SELECT IdCatalogo
-    ,IdCatalogoTipo 
-    ,Nombre         
-    ,Descripcion    
-    ,Estado         
-    ,FechaCrea      
-    ,FechaModifica  
-    From Catalogo   
-    WHERE Estado='A'
-    AND   IdCatalogoTipo=2;
+                ,IdCatalogoTipo 
+                ,Nombre         
+                ,Descripcion    
+                ,Estado         
+                ,FechaCrea      
+                ,FechaModifica  
+                From Catalogo   
+                WHERE Estado='A'
+                AND   IdCatalogoTipo=2;
 
     SELECT COUNT(*) TotalReg
     FROM Catalogo
     WHERE Estado='A' AND IdCatalogoTipo=2;
 
-    SELECT IdCatalogo 
+SELECT IdCatalogo 
                 ,IdCatalogoTipo  
                 ,Nombre          
                 ,Descripcion     
