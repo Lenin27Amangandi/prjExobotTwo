@@ -25,7 +25,7 @@ public class SexoDTO {
 
     @Override
     public String toString() {
-        return getClass().getName()
+        return "\n"+getClass().getName()
                 +"\n IdCatalogo:        "+ getIdCatalogo()
                 +"\n IdCatalogoTipo:    "+ getIdCatalogoTipo()
                 +"\n Nombre:            "+ getNombre()

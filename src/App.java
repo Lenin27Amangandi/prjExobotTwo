@@ -32,26 +32,33 @@ public class App {
         // System.out.println(e.toString());
         // }
 
+        // int a;
+        // try {
+        // a = 10 / 0;
+        // } catch (ArithmeticException e) {
+        // System.out.println("Thu erro es divicion para cero ,,, " + e.getMessage());
+        // }
+
         try {
             SexoBL sBL = new SexoBL();
             for (SexoDTO s : sBL.getAll()) {
                 System.out.println(s.toString());
             }
             System.out.println("-----------------------");
-            
+
             EstadoCivilBL ecBL = new EstadoCivilBL();
             for (EstadoCivilDTO reg : ecBL.getAll()) {
                 System.out.println(reg.toString());
             }
-            
+
             System.out.println("----------------------");
-            
+
             TipoPersonaBL tpBL = new TipoPersonaBL();
             for (PersonaTipoDTO reg : tpBL.getAll()) {
                 System.out.println(reg.toString());
             }
             System.out.println("----------------------");
-            
+
         } catch (Exception e) {
             System.out.println(e.toString());
         }

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import DataAcces.IDAO;
 import DataAcces.SQLiteDataHelper;
+import FrameWork.XanderException;
 
 public class SexoDAO extends SQLiteDataHelper implements IDAO<SexoDTO> {
 
@@ -27,7 +28,8 @@ public class SexoDAO extends SQLiteDataHelper implements IDAO<SexoDTO> {
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
-            throw e;
+            // throw e;
+            throw new XanderException(e.getMessage(), getClass().getName(), "create()");
         }
     }
 
@@ -56,15 +58,19 @@ public class SexoDAO extends SQLiteDataHelper implements IDAO<SexoDTO> {
             Connection conn = opConnection();
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
-
             while (rs.next()) {
-
-                SexoDTO s = new SexoDTO(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(5),
-                        rs.getString(6), rs.getString(7));
+                SexoDTO s = new SexoDTO(rs.getInt(1)
+                                        , rs.getInt(2)
+                                        , rs.getString(3)
+                                        , rs.getString(4)
+                                        , rs.getString(5)
+                                        ,rs.getString(6)
+                                        , rs.getString(7));
                 lst.add(s);
             }
         } catch (SQLException e) {
-            throw e;
+            // throw e;
+            throw new XanderException(e.getMessage(), getClass().getName(), "readAll()");
         }
         return lst;
     }
@@ -84,7 +90,9 @@ public class SexoDAO extends SQLiteDataHelper implements IDAO<SexoDTO> {
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
-            throw e;
+            // throw e;
+            throw new XanderException(e.getMessage(), getClass().getName(), "update()");
+
         }
     }
 
@@ -99,9 +107,9 @@ public class SexoDAO extends SQLiteDataHelper implements IDAO<SexoDTO> {
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
-            throw e;
+            // throw e;
+            throw new XanderException(e.getMessage(), getClass().getName(), "delete()");
         }
-
     }
 
     @Override
@@ -129,7 +137,8 @@ public class SexoDAO extends SQLiteDataHelper implements IDAO<SexoDTO> {
                         rs.getString(6), rs.getString(7));
             }
         } catch (SQLException e) {
-            throw e;
+            // throw e;
+            throw new XanderException(e.getMessage(), getClass().getName(), "readBy()");
         }
         return s;
     }
@@ -137,20 +146,20 @@ public class SexoDAO extends SQLiteDataHelper implements IDAO<SexoDTO> {
     public Integer getRowCount() throws Exception {
         String query = "SELECT COUNT(*) TotalReg"
                     + "FROM Catalogo"
-                 + "WHERE Estado='A'"
-                 + "AND IdCatalogoTipo=2";
-        try {
-         Connection conn = opConnection();
-         Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
-         while (rs.next()) {
-             return rs.getInt(1);
-
+                    + "WHERE Estado='A'"
+                    + "AND IdCatalogoTipo=2";
+            try {
+                    Connection conn = opConnection();
+                    Statement stmt = conn.createStatement();
+                    ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                return rs.getInt(1);
             }
-         } catch (SQLException e) { 
-        //   throw new PatException(e.getMessage(), getClass().getName(), "getMaxRow");
-        throw e;
-          }
+                } catch (SQLException e) { 
+            //   throw new PatException(e.getMessage(), getClass().getName(), "getMaxRow");
+            // throw e;
+            throw new XanderException(e.getMessage(), getClass().getName(), "getRowCount()");
+        }
         return 0;
     }
 }
