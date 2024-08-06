@@ -1,4 +1,6 @@
 import BussinesLogic.Entities.SexoBL;
+import DataAcces.DTO.EstadoCivilDAO;
+import DataAcces.DTO.EstadoCivilDTO;
 import DataAcces.DTO.PersonaTipoDAO;
 import DataAcces.DTO.PersonaTipoDTO;
 import DataAcces.DTO.SexoDAO;
@@ -29,6 +31,12 @@ public class App {
                 System.out.println(s.toString());
             }
             System.out.println("------------------");
+
+            EstadoCivilDAO ecDao = new EstadoCivilDAO();
+            for (EstadoCivilDTO reg : ecDao.readAll()) {
+                System.out.println(reg.toString());
+            }
+
         } catch (Exception e) {
             System.out.println(e.toString());
         }
