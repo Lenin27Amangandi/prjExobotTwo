@@ -5,23 +5,23 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+
 import DataAcces.IDAO;
 import DataAcces.SQLiteDataHelper;
 
-public class SexoDAO extends SQLiteDataHelper implements IDAO<SexoDTO> {
+public class PersonaTipoDAO extends SQLiteDataHelper implements IDAO<PersonaTipoDTO> {
 
     @Override
-    public boolean create(SexoDTO entity) throws Exception {
+    public boolean create(PersonaTipoDTO entity) throws Exception {
         String query = "INSERT INTO Catalogo (IdCatalogoTipo,Nombre,Descripcion) VALUES(?,?,?)";
         try {
             Connection conn = opConnection();
             PreparedStatement pstmt = conn.prepareStatement(query);
-            pstmt.setInt(1, 2);
+            pstmt.setInt(1, 1);
             pstmt.setString(2, entity.getNombre());
             pstmt.setString(3, entity.getDescripcion());
             pstmt.executeUpdate();
@@ -32,16 +32,9 @@ public class SexoDAO extends SQLiteDataHelper implements IDAO<SexoDTO> {
     }
 
     @Override
-    public List<SexoDTO> readAll() throws Exception {
+    public List<PersonaTipoDTO> readAll() throws Exception {
 
-        // ,IdCatalogoTipo
-        // ,Nombre
-        // ,Descripcion
-        // ,Estado
-        // ,FechaCrea
-        // ,FechaModifica
-
-        List<SexoDTO> lst = new ArrayList<>();
+        List<PersonaTipoDTO> lst = new ArrayList<>();
         String query = "SELECT IdCatalogo "
                 + " ,IdCatalogoTipo  "
                 + " ,Nombre          "
@@ -51,7 +44,7 @@ public class SexoDAO extends SQLiteDataHelper implements IDAO<SexoDTO> {
                 + " ,FechaModifica   "
                 + " From Catalogo    "
                 + " WHERE Estado='A' "
-                + " AND   IdCatalogoTipo = 2";
+                + " AND   IdCatalogoTipo = 1";
         try {
             Connection conn = opConnection();
             Statement stmt = conn.createStatement();
@@ -59,8 +52,13 @@ public class SexoDAO extends SQLiteDataHelper implements IDAO<SexoDTO> {
 
             while (rs.next()) {
 
-                SexoDTO s = new SexoDTO(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(5),
-                        rs.getString(6), rs.getString(7));
+                PersonaTipoDTO s = new PersonaTipoDTO(rs.getInt(1)
+                                                    , rs.getInt(2)
+                                                    , rs.getString(3)
+                                                    , rs.getString(4)
+                                                    , rs.getString(5)
+                                                    ,rs.getString(6)
+                                                    , rs.getString(7));
                 lst.add(s);
             }
         } catch (SQLException e) {
@@ -70,7 +68,7 @@ public class SexoDAO extends SQLiteDataHelper implements IDAO<SexoDTO> {
     }
 
     @Override
-    public boolean update(SexoDTO entity) throws Exception {
+    public boolean update(PersonaTipoDTO entity) throws Exception {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-mm-dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
         String query = "UPDATE CATALOGO SET Nombre=?, Descriipcion=?, FechaModifica=?, WHERE IdCatalogo=?";
@@ -105,19 +103,19 @@ public class SexoDAO extends SQLiteDataHelper implements IDAO<SexoDTO> {
     }
 
     @Override
-    public SexoDTO readBy(Integer id) throws Exception {
-        SexoDTO s = new SexoDTO();
+    public PersonaTipoDTO readBy(Integer id) throws Exception {
+        PersonaTipoDTO s = new PersonaTipoDTO();
         String query = "SELECT IdCatalogo "
-                + " ,IdCatalogoTipo  "
-                + " ,Nombre          "
-                + " ,Descripcion     "
-                + " ,Estado          "
-                + " ,FechaCrea       "
-                + " ,FechaModifica   "
-                + " From Catalogo    "
-                + " WHERE Estado='A' "
-                + " AND   IdCatalogoTipo = 2"
-                + " AND   IdCatalogo = " + id.toString();
+                        + " ,IdCatalogoTipo  "
+                        + " ,Nombre          "
+                        + " ,Descripcion     "
+                        + " ,Estado          "
+                        + " ,FechaCrea       "
+                        + " ,FechaModifica   "
+                        + " From Catalogo    "
+                        + " WHERE Estado='A' "
+                        + " AND   IdCatalogoTipo = 1"
+                        + " AND   IdCatalogo = " + id.toString();
 
         try {
             Connection conn = opConnection();
@@ -125,7 +123,7 @@ public class SexoDAO extends SQLiteDataHelper implements IDAO<SexoDTO> {
             ResultSet rs = stmt.executeQuery(query);
 
             while (rs.next()) {
-                s = new SexoDTO(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(5),
+                s = new PersonaTipoDTO(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(5),
                         rs.getString(6), rs.getString(7));
             }
         } catch (SQLException e) {
@@ -137,20 +135,19 @@ public class SexoDAO extends SQLiteDataHelper implements IDAO<SexoDTO> {
     public Integer getRowCount() throws Exception {
         String query = "SELECT COUNT(*) TotalReg"
                     + "FROM Catalogo"
-                 + "WHERE Estado='A'"
-                 + "AND IdCatalogoTipo=2";
+                    + "WHERE Estado='A'"
+                    + "AND IdCatalogoTipo=1";
         try {
-         Connection conn = opConnection();
-         Statement stmt = conn.createStatement();
+            Connection conn = opConnection();
+            Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
-         while (rs.next()) {
-             return rs.getInt(1);
-
+            while (rs.next()) {
+                return rs.getInt(1);
             }
-         } catch (SQLException e) { 
+            } catch (SQLException e) { 
         //   throw new PatException(e.getMessage(), getClass().getName(), "getMaxRow");
-        throw e;
-          }
+            throw e;
+            }
         return 0;
     }
 }
